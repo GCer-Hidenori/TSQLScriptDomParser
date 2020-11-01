@@ -18,12 +18,15 @@ namespace LibSQLScriptDom2016
             Node node = new Node();
             node.class_name = tsqlnode.GetType().Name;
 
-            StringBuilder sb = new StringBuilder();
-            for (var i = tsqlnode.FirstTokenIndex; i <= tsqlnode.LastTokenIndex; i++)
+            if (tsqlnode.FirstTokenIndex >= 0)
             {
-                sb.Append(tsqlnode.ScriptTokenStream[i].Text);
+                StringBuilder sb = new StringBuilder();
+                for (var i = tsqlnode.FirstTokenIndex; i <= tsqlnode.LastTokenIndex; i++)
+                {
+                    sb.Append(tsqlnode.ScriptTokenStream[i].Text);
+                }
+                node.token = sb.ToString();
             }
-            node.token = sb.ToString();
 
             if (parent_node != null)parent_node.setListDic(parent_key_name, node);
 
@@ -34,7 +37,7 @@ namespace LibSQLScriptDom2016
                     //NOP
                 }else if (prop.Name == "Value")
                 {
-                    node.value = prop.GetValue(tsqlnode).ToString();
+                    if(prop.GetValue(tsqlnode) != null)node.value = prop.GetValue(tsqlnode).ToString();
                 } else if (prop.PropertyType.IsEnum == true & prop.PropertyType.Namespace == "Microsoft.SqlServer.TransactSql.ScriptDom") {
                     node.setDic(prop.Name,prop.GetValue(tsqlnode).ToString());
                 }

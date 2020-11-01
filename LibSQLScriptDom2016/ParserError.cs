@@ -12,6 +12,10 @@ namespace LibSQLScriptDom2016
         {
 
         }
+        public ParserError(string message) : base(message)
+        {
+
+        }
 
     }
 

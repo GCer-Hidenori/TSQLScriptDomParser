@@ -40,8 +40,9 @@ namespace LibSQLScriptDom2016
                 foreach (var e in errors)
                 {
 
-                    sb.AppendLine("error {++i}\nLine { e.Line}\nColumn { e.Column}\nOffset {e.Offset}\nNumber {e.Number}\n{e.Message}");
+                    sb.AppendLine($"error {++i}\nLine { e.Line}\nColumn { e.Column}\nOffset {e.Offset}\nNumber {e.Number}\n{e.Message}");
                 }
+                throw new ParserError(sb.ToString());
             }
             var tree_parser = new TreeParser();
             root = tree_parser.parse(f);
