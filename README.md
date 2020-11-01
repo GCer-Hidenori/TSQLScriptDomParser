@@ -18,13 +18,13 @@ TSQL parser with Microsoft SQL Server Transact-SQL ScriptDom.
 
 # Demo
 
+sqlparser -o xml -s "select * from tab1 join tab2 on tab1.a=tab2.b"
 ![Demo](resources/file-0.png)
 
-sqlparser -o xml -s "select * from tab1 join tab2 on tab1.a=tab2.b"
   
+sqlparser -o json -s "select * from tab1"
 ![Demo](resources/file-1.png)
 
-sqlparser -o json -s "select * from tab1"
 
 # Advantages
 
