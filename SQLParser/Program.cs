@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 using CommandLine;
 
 /*
@@ -83,15 +85,19 @@ namespace SQLParser
             var doc = new System.Xml.XmlDocument();
             doc.LoadXml(xmlstring);
             var ws = new System.Xml.XmlWriterSettings();
+            ws.Encoding = new System.Text.UTF8Encoding(false);
             ws.Indent = true;
             ws.IndentChars = "  ";
 
-            StringBuilder sb = new StringBuilder();
-            using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sb, ws))
+            using (var stream = new MemoryStream())
             {
-                doc.Save(writer);
+                using (var writer = XmlWriter.Create(stream, ws))
+                {
+                    doc.Save(writer);
+                }
+                return (new System.Text.UTF8Encoding(false)).GetString(stream.ToArray());
+                
             }
-            return sb.ToString();
         }
     }
 }
