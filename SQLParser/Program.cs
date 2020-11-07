@@ -26,8 +26,6 @@ namespace SQLParser
                     
                     try
                     {
-
-
                         if (option.str != null)
                         {
                             lib.load_string(option.str);
@@ -61,6 +59,10 @@ namespace SQLParser
                             break;
                         case "XML":
                             output = lib.to_xml().OuterXml;
+                            if (option.indentxml)
+                            {
+                                output = indentxml(output);
+                            }
                             break;
                         default:
                             Console.Error.WriteLine("Invalid format '{0}'.Please specify JSON or XML.");
@@ -75,6 +77,21 @@ namespace SQLParser
                 default:
                     return 1;
             }
+        }
+        static string indentxml(string xmlstring)
+        {
+            var doc = new System.Xml.XmlDocument();
+            doc.LoadXml(xmlstring);
+            var ws = new System.Xml.XmlWriterSettings();
+            ws.Indent = true;
+            ws.IndentChars = "  ";
+
+            StringBuilder sb = new StringBuilder();
+            using (System.Xml.XmlWriter writer = System.Xml.XmlWriter.Create(sb, ws))
+            {
+                doc.Save(writer);
+            }
+            return sb.ToString();
         }
     }
 }

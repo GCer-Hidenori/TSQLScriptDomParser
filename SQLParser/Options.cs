@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
-//using CommandLine.Text;
 
 namespace SQLParser
 {
@@ -21,9 +20,13 @@ namespace SQLParser
 
         [Option('o',"format", Required = true, HelpText = "Output format.json or xml.")]
         public string format { get; set; }
-/*
-        [Option("noerrorlistener",Required =false,HelpText ="No use error listener")]
-        public bool noerrorlistener { get; set; }
-	*/
+
+        [Option('i', "indentxml", Required = false, HelpText = "Indent xml.")]
+        public bool indentxml { get; set; }
+
+        /*
+                [Option("noerrorlistener",Required =false,HelpText ="No use error listener")]
+                public bool noerrorlistener { get; set; }
+            */
     }
 }
