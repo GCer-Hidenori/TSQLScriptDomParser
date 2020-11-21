@@ -24,6 +24,9 @@ namespace SQLParser
         [Option('i', "indentxml", Required = false, HelpText = "Indent xml.")]
         public bool indentxml { get; set; }
 
+        [Option('u', "outputfilename", Required = false, HelpText = "Output filename.")]
+        public string outputfilename { get; set; }
+
         /*
                 [Option("noerrorlistener",Required =false,HelpText ="No use error listener")]
                 public bool noerrorlistener { get; set; }

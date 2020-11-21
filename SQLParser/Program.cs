@@ -70,7 +70,18 @@ namespace SQLParser
                             Console.Error.WriteLine("Invalid format '{0}'.Please specify JSON or XML.");
                             return 1;
                     }
-                    Console.WriteLine(output);
+                    if (option.outputfilename != null)
+                    {
+                        using (System.IO.StreamWriter sw = new System.IO.StreamWriter(option.outputfilename))
+                        {
+                            sw.Write(output); // ファイルへテキストデータを出力する
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(output);
+                    }
+                   
                     return 0;
                     
                 case ParserResultType.NotParsed:
