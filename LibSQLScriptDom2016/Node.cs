@@ -12,13 +12,10 @@ namespace LibSQLScriptDom2016
     {
         static Hashtable members = new Hashtable();
 
-        public string value;
         public string token;
         public string class_name;
         private Dictionary<string,object> dic = new Dictionary<string,object>();
-        //private Dictionary<string, object[]> listdic = new Dictionary<string, object[]>();
         private Dictionary<string, List<Node>> listdic = new Dictionary<string, List<Node>>();
-        //public List<Node> children = new List<Node>();
 
         public Node()
         {
@@ -56,7 +53,6 @@ namespace LibSQLScriptDom2016
             var hash = new Hashtable();
             hash.Add("token", token);
             hash.Add("class", class_name);
-            hash.Add("value", value);
            
             foreach(var key in dic.Keys)
             {
@@ -87,7 +83,6 @@ namespace LibSQLScriptDom2016
             var element = doc.CreateElement("node");
             element.SetAttribute("token", token);
             element.SetAttribute("class", class_name);
-            element.SetAttribute("value", value);
 
             foreach (var key in dic.Keys)
             {

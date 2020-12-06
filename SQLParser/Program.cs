@@ -74,7 +74,7 @@ namespace SQLParser
                     {
                         using (System.IO.StreamWriter sw = new System.IO.StreamWriter(option.outputfilename))
                         {
-                            sw.Write(output); // ファイルへテキストデータを出力する
+                            sw.Write(output);
                         }
                     }
                     else

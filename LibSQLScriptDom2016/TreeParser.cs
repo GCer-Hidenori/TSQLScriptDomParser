@@ -32,12 +32,10 @@ namespace LibSQLScriptDom2016
 
             foreach (var prop in tsqlnode.GetType().GetProperties())
             {
-                if(prop.Name == "ScriptTokenStream")
+                if((new List<string> { "ScriptTokenStream","StartOffset", "FragmentLength", "StartLine", "StartColumn", "FirstTokenIndex", "LastTokenIndex" })
+.Contains(prop.Name))
                 {
                     //NOP
-                }else if (prop.Name == "Value")
-                {
-                    if(prop.GetValue(tsqlnode) != null)node.value = prop.GetValue(tsqlnode).ToString();
                 } else if (prop.PropertyType.IsEnum == true & prop.PropertyType.Namespace == "Microsoft.SqlServer.TransactSql.ScriptDom") {
                     node.setDic(prop.Name,prop.GetValue(tsqlnode).ToString());
                 }
@@ -82,8 +80,7 @@ namespace LibSQLScriptDom2016
 	                        }
 	                        else
 	                        {
-                                //NOP
-                                //FirstTokenIndex FragmentLength LastTokenIndex StartColumn StartLine StartOffset Count
+                    			node.setDic(prop.Name,prop.GetValue(tsqlnode).ToString());
                             }
                         }
                     }
