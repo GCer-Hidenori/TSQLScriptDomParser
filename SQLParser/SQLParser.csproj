@@ -7,7 +7,7 @@
     <ProjectGuid>{F19167A0-A3DF-4AB6-8641-DF93829870E9}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>SQLParser</RootNamespace>
-    <AssemblyName>SDomSQLParser</AssemblyName>
+    <AssemblyName>sqlparser</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
