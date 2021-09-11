@@ -59,6 +59,10 @@
       <Project>{3a15a9d5-d56f-4ec5-b23a-d5244aff2a28}</Project>
       <Name>LibSQLScriptDom2016</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LibSQLScriptDom2019\LibSQLScriptDom2019.csproj">
+      <Project>{d3a629e1-0196-4ba5-8873-fbcabee12b61}</Project>
+      <Name>LibSQLScriptDom2019</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

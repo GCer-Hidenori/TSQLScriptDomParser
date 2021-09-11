@@ -24,8 +24,23 @@ namespace SQLParser
                 case ParserResultType.Parsed:
                     var parsed = parseResult as Parsed<Options>;
                     option = parsed.Value;
-                    LibSQLScriptDom2016.LibSQLScriptDom2016 lib = new LibSQLScriptDom2016.LibSQLScriptDom2016();
-                    
+                    LibSQLScriptDom2016.LibSQLScriptDom2016 lib;
+                    switch (option.scriptdomversion)
+                    {
+                        case "2016":
+                        case "13":
+                            lib = new LibSQLScriptDom2016.LibSQLScriptDom2016();
+                            break;
+                        case "2019":
+                        case "15":
+                            lib = new LibSQLScriptDom2019.LibSQLScriptDom2019();
+                            break;
+                        default:
+                            Console.Error.WriteLine("Not supported SqlServer.TransactSql.ScriptDom version.");
+                            throw new ArgumentException();
+                    }
+                    lib.setParser(option.parserversion, !option.no_quotedIdentifier);
+
                     try
                     {
                         if (option.str != null)

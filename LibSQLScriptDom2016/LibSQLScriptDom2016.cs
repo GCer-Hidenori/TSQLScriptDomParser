@@ -9,21 +9,49 @@ using Newtonsoft.Json;
 using System.Xml;
 
 /*
-Install-Package Newtonsoft.Json -Version 12.0.3
+Install-Package Newtonsoft.Json
 */
 
 namespace LibSQLScriptDom2016
 {
     public class LibSQLScriptDom2016
     {
-        dynamic root;
+        public dynamic root;
+        public TSqlParser parser = null;
 
-    	public LibSQLScriptDom2016()
+        public LibSQLScriptDom2016()
     	{
     	}
+        public virtual void setParser(int parserversion,bool initialQuotedIdentifiers)
+        { 
+            switch (parserversion)
+            {
+                case 80:
+                    parser = new TSql80Parser(initialQuotedIdentifiers);
+                    break;
+                case 90:
+                    parser = new TSql90Parser(initialQuotedIdentifiers);
+                    break;
+                case 100:
+                    parser = new TSql100Parser(initialQuotedIdentifiers);
+                    break;
+                case 110:
+                    parser = new TSql110Parser(initialQuotedIdentifiers);
+                    break;
+                case 120:
+                    parser = new TSql120Parser(initialQuotedIdentifiers);
+                    break;
+                case 0:
+                case 130:
+                    parser = new TSql130Parser(initialQuotedIdentifiers);
+                    break;
+                default:
+                    Console.Error.WriteLine("SqlServer.TransactSql.ScriptDom version 13 supports only 80,90,100,110,120,130 parser.");
+                    throw new ArgumentException();
+            }
+        }
         public void load_string(string str)
         {
-            var parser = new TSql110Parser(false);
             IList<ParseError> errors;
             TSqlFragment f;
             using (var reader = new StringReader(str))
@@ -65,5 +93,6 @@ namespace LibSQLScriptDom2016
         {
             return root.to_xml();
         }
+
     }
 }

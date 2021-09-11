@@ -7,7 +7,7 @@ using Microsoft.SqlServer.TransactSql.ScriptDom;
 
 namespace LibSQLScriptDom2016
 {
-    class TreeParser
+    public class TreeParser
     {
         public TreeParser()
         {

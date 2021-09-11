@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace LibSQLScriptDom2016
 {
-    class Node
+    public class Node
     {
         static Hashtable members = new Hashtable();
 
