@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibSQLScriptDom2016
+namespace LibSQLScriptDom0013
 {
     public class ParserError : Exception
     {

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.SqlServer.TransactSql.ScriptDom;
 
-namespace LibSQLScriptDom2019
+namespace LibSQLScriptDom0150
 {
-    class TreeParser : LibSQLScriptDom2016.TreeParser
+    class TreeParser : LibSQLScriptDom0013.TreeParser
     {
       
     }

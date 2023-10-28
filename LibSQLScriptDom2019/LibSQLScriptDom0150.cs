@@ -14,12 +14,12 @@ using Newtonsoft.Json;
  
  */
 
-namespace LibSQLScriptDom2019
+namespace LibSQLScriptDom0150
 {
-    public class LibSQLScriptDom2019  : LibSQLScriptDom2016.LibSQLScriptDom2016
+    public class LibSQLScriptDom0150  : LibSQLScriptDom0013.LibSQLScriptDom0013
     {
 
-        public LibSQLScriptDom2019()
+        public LibSQLScriptDom0150()
         {
         }
         public override void setParser(int parserversion, bool initialQuotedIdentifiers)

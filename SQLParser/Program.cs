@@ -8,7 +8,7 @@ using System.Xml;
 using CommandLine;
 
 /*
- Install-Package CommandLineParser -Version 2.8.0
+ Install-Package CommandLineParser
 */
 namespace SQLParser
 {
@@ -24,16 +24,14 @@ namespace SQLParser
                 case ParserResultType.Parsed:
                     var parsed = parseResult as Parsed<Options>;
                     option = parsed.Value;
-                    LibSQLScriptDom2016.LibSQLScriptDom2016 lib;
+                    LibSQLScriptDom0013.LibSQLScriptDom0013 lib;
                     switch (option.scriptdomversion)
                     {
-                        case "2016":
                         case "13":
-                            lib = new LibSQLScriptDom2016.LibSQLScriptDom2016();
+                            lib = new LibSQLScriptDom0013.LibSQLScriptDom0013();
                             break;
-                        case "2019":
-                        case "15":
-                            lib = new LibSQLScriptDom2019.LibSQLScriptDom2019();
+                        case "150":
+                            lib = new LibSQLScriptDom0150.LibSQLScriptDom0150();
                             break;
                         default:
                             Console.Error.WriteLine("Not supported SqlServer.TransactSql.ScriptDom version.");
@@ -63,7 +61,7 @@ namespace SQLParser
                             Console.Error.WriteLine("Filename or string is required.");
                             return 1;
                         }
-                    }catch(LibSQLScriptDom2016.ParserError e)
+                    }catch(LibSQLScriptDom0013.ParserError e)
                     {
                         Console.Error.WriteLine(e);
                         return 1;

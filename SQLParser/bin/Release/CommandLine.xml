@@ -58,8 +58,34 @@
             Gets or sets the <see cref="T:System.Type"/> that contains the resources for <see cref="P:CommandLine.BaseAttribute.HelpText"/>.
             </summary>
         </member>
+        <member name="P:CommandLine.Core.OptionSpecification.FlagCounter">
+            <summary>
+            Whether this is an int option that counts how many times a flag was set rather than taking a value on the command line
+            </summary>
+        </member>
         <member name="F:CommandLine.Core.Specification.conversionType">
             This information is denormalized to decouple Specification from PropertyInfo.
+        </member>
+        <member name="P:CommandLine.Core.Value.ExplicitlyAssigned">
+            <summary>
+            Whether this value came from a long option with "=" separating the name from the value
+            </summary>
+        </member>
+        <member name="P:CommandLine.Core.Value.FromSeparator">
+            <summary>
+            Whether this value came from a sequence specified with a separator (e.g., "--files a.txt,b.txt,c.txt")
+            </summary>
+        </member>
+        <member name="P:CommandLine.Core.Value.Forced">
+            <summary>
+            Whether this value came from args after the -- separator (when EnableDashDash = true)
+            </summary>
+        </member>
+        <member name="M:CommandLine.Core.Tokenizer.Normalize(System.Collections.Generic.IEnumerable{CommandLine.Core.Token},System.Func{System.String,System.Boolean})">
+            <summary>
+            Normalizes the given <paramref name="tokens"/>.
+            </summary>
+            <returns>The given <paramref name="tokens"/> minus all names, and their value if one was present, that are not found using <paramref name="nameLookup"/>.</returns>
         </member>
         <member name="T:CommandLine.ErrorType">
             <summary>
@@ -548,6 +574,12 @@
             Gets or sets the option's mutually exclusive set name.
             </summary>
         </member>
+        <member name="P:CommandLine.OptionAttribute.FlagCounter">
+            <summary>
+            If true, this is an int option that counts how many times a flag was set (e.g. "-v -v -v" or "-vvv" would return 3).
+            The property must be of type int (signed 32-bit integer).
+            </summary>
+        </member>
         <member name="P:CommandLine.OptionAttribute.Separator">
             <summary>
             When applying attribute to <see cref="T:System.Collections.Generic.IEnumerable`1"/> target properties,
@@ -997,16 +1029,21 @@
             Parser result type discriminator, defined as <see cref="T:CommandLine.ParserResultType"/> enumeration.
             </summary>
         </member>
+        <member name="P:CommandLine.ParserResult`1.Value">
+            <summary>
+            Gets the instance with parsed values. If one or more errors occures, <see langword="default"/> is returned.
+            </summary>
+        </member>
+        <member name="P:CommandLine.ParserResult`1.Errors">
+            <summary>
+            Gets the sequence of parsing errors. If there are no errors, then an empty IEnumerable is returned.
+            </summary>
+        </member>
         <member name="T:CommandLine.Parsed`1">
             <summary>
             It contains an instance of type <typeparamref name="T"/> with parsed values.
             </summary>
             <typeparam name="T">The type with attributes that define the syntax of parsing rules.</typeparam>
-        </member>
-        <member name="P:CommandLine.Parsed`1.Value">
-            <summary>
-            Gets the instance with parsed values.
-            </summary>
         </member>
         <member name="M:CommandLine.Parsed`1.Equals(System.Object)">
             <summary>
@@ -1033,11 +1070,6 @@
             It contains a sequence of <see cref="T:CommandLine.Error"/>.
             </summary>
             <typeparam name="T">The type with attributes that define the syntax of parsing rules.</typeparam>
-        </member>
-        <member name="P:CommandLine.NotParsed`1.Errors">
-            <summary>
-            Gets the sequence of parsing errors.
-            </summary>
         </member>
         <member name="M:CommandLine.NotParsed`1.Equals(System.Object)">
             <summary>
@@ -1621,11 +1653,29 @@
             <summary>
             Gets or sets a value indicating whether enable double dash '--' syntax,
             that forces parsing of all subsequent tokens as values.
+            If GetoptMode is true, this defaults to true, but can be turned off by explicitly specifying EnableDashDash = false.
             </summary>
         </member>
         <member name="P:CommandLine.ParserSettings.MaximumDisplayWidth">
             <summary>
             Gets or sets the maximum width of the display.  This determines word wrap when displaying the text.
+            </summary>
+        </member>
+        <member name="P:CommandLine.ParserSettings.AllowMultiInstance">
+            <summary>
+            Gets or sets a value indicating whether options are allowed to be specified multiple times.
+            If GetoptMode is true, this defaults to true, but can be turned off by explicitly specifying AllowMultiInstance = false.
+            </summary>
+        </member>
+        <member name="P:CommandLine.ParserSettings.GetoptMode">
+            <summary>
+            Whether strict getopt-like processing is applied to option values; if true, AllowMultiInstance and EnableDashDash will default to true as well.
+            </summary>
+        </member>
+        <member name="P:CommandLine.ParserSettings.PosixlyCorrect">
+            <summary>
+            Whether getopt-like processing should follow the POSIX rules (the equivalent of using the "+" prefix in the C getopt() call).
+            If not explicitly set, will default to false unless the POSIXLY_CORRECT environment variable is set, in which case it will default to true.
             </summary>
         </member>
         <member name="M:CommandLine.ParserSettings.Dispose">
@@ -2547,6 +2597,15 @@
             <param name="options">A parsed (or manually correctly constructed instance).</param>
             <returns>A string with command line arguments.</returns>
         </member>
+        <member name="M:CommandLine.UnParserExtensions.FormatCommandLineArgs``1(CommandLine.Parser,``0)">
+            <summary>
+            Format a command line argument string from a parsed instance in the form of string[]. 
+            </summary>
+            <typeparam name="T">Type of <paramref name="options"/>.</typeparam>
+            <param name="parser">Parser instance.</param>
+            <param name="options">A parsed (or manually correctly constructed instance).</param>
+            <returns>A string[] with command line arguments.</returns>
+        </member>
         <member name="M:CommandLine.UnParserExtensions.FormatCommandLine``1(CommandLine.Parser,``0,System.Action{CommandLine.UnParserSettings})">
             <summary>
             Format a command line argument string from a parsed instance. 
@@ -2557,6 +2616,25 @@
             <param name="configuration">The <see cref="T:System.Action`1"/> lambda used to configure
             aspects and behaviors of the unparsersing process.</param>
             <returns>A string with command line arguments.</returns>
+        </member>
+        <member name="M:CommandLine.UnParserExtensions.FormatCommandLineArgs``1(CommandLine.Parser,``0,System.Action{CommandLine.UnParserSettings})">
+            <summary>
+            Format a command line argument string[] from a parsed instance. 
+            </summary>
+            <typeparam name="T">Type of <paramref name="options"/>.</typeparam>
+            <param name="parser">Parser instance.</param>
+            <param name="options">A parsed (or manually correctly constructed instance).</param>
+            <param name="configuration">The <see cref="T:System.Action`1"/> lambda used to configure
+            aspects and behaviors of the unparsersing process.</param>
+            <returns>A string[] with command line arguments.</returns>
+        </member>
+        <member name="M:CommandLine.UnParserExtensions.SplitArgs(System.String,System.Boolean)">
+            <summary>
+            Returns a string array that contains the substrings in this instance that are delimited by space considering string between double quote.
+            </summary>
+            <param name="command">the commandline string</param>
+            <param name="keepQuote">don't remove the quote</param>
+            <returns>a string array that contains the substrings in this instance</returns>
         </member>
         <member name="T:CommandLine.ValueAttribute">
             <summary>
@@ -2583,12 +2661,13 @@
             Models a verb command specification.
             </summary>
         </member>
-        <member name="M:CommandLine.VerbAttribute.#ctor(System.String,System.Boolean)">
+        <member name="M:CommandLine.VerbAttribute.#ctor(System.String,System.Boolean,System.String[])">
             <summary>
             Initializes a new instance of the <see cref="T:CommandLine.VerbAttribute"/> class.
             </summary>
             <param name="name">The long name of the verb command.</param>
             <param name="isDefault">Whether the verb is the default verb.</param>
+            <param name="aliases">aliases for this verb. i.e. "move" and "mv"</param>
             <exception cref="T:System.ArgumentException">Thrown if <paramref name="name"/> is null, empty or whitespace and <paramref name="isDefault"/> is false.</exception>
         </member>
         <member name="P:CommandLine.VerbAttribute.Name">
@@ -2614,6 +2693,11 @@
         <member name="P:CommandLine.VerbAttribute.IsDefault">
             <summary>
             Gets whether this verb is the default verb.
+            </summary>
+        </member>
+        <member name="P:CommandLine.VerbAttribute.Aliases">
+            <summary>
+            Gets or sets the aliases
             </summary>
         </member>
         <member name="F:CSharpx.EitherType.Left">
