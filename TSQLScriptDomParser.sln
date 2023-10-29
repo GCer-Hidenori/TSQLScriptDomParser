@@ -5,9 +5,7 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLParser", "SQLParser\SQLParser.csproj", "{F19167A0-A3DF-4AB6-8641-DF93829870E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSQLScriptDom0013", "LibSQLScriptDom2016\LibSQLScriptDom0013.csproj", "{3A15A9D5-D56F-4EC5-B23A-D5244AFF2A28}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSQLScriptDom0150", "LibSQLScriptDom2019\LibSQLScriptDom0150.csproj", "{D3A629E1-0196-4BA5-8873-FBCABEE12B61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSQLScriptDom", "LibSQLScriptDom2016\LibSQLScriptDom.csproj", "{3A15A9D5-D56F-4EC5-B23A-D5244AFF2A28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{3A15A9D5-D56F-4EC5-B23A-D5244AFF2A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A15A9D5-D56F-4EC5-B23A-D5244AFF2A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A15A9D5-D56F-4EC5-B23A-D5244AFF2A28}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D3A629E1-0196-4BA5-8873-FBCABEE12B61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D3A629E1-0196-4BA5-8873-FBCABEE12B61}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D3A629E1-0196-4BA5-8873-FBCABEE12B61}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D3A629E1-0196-4BA5-8873-FBCABEE12B61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

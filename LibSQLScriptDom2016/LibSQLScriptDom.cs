@@ -12,14 +12,14 @@ using System.Xml;
 Install-Package Newtonsoft.Json
 */
 
-namespace LibSQLScriptDom0013
+namespace LibSQLScriptDom
 {
-    public class LibSQLScriptDom0013
+    public class LibSQLScriptDom
     {
         public dynamic root;
         public TSqlParser parser = null;
 
-        public LibSQLScriptDom0013()
+        public LibSQLScriptDom()
     	{
     	}
         public virtual void setParser(int parserversion,bool initialQuotedIdentifiers)

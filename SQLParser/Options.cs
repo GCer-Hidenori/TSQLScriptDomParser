@@ -27,8 +27,6 @@ namespace SQLParser
         [Option('u', "outputfilename", Required = false, HelpText = "Output filename.")]
         public string outputfilename { get; set; }
 
-        [Option('d',"scriptdomversion",Default="150",Required =false,HelpText ="SqlServer.TransactSql.ScriptDom version.13,150.")]
-        public string scriptdomversion { get; set; }
 
         [Option('p',"parserversion",Required =false,HelpText="Parser version.ex)110,130")]
         public int parserversion { get; set; }

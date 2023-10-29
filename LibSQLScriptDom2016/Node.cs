@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Xml;
 
-namespace LibSQLScriptDom0013
+namespace LibSQLScriptDom
 {
     public class Node
     {
