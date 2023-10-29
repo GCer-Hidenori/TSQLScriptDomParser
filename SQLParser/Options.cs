@@ -10,29 +10,29 @@ namespace SQLParser
     class Options
     {
         [Option('f',"filename", Required = false, HelpText = "Input filename.")]
-        public string filename { get; set; }
+        public string Filename { get; set; }
 
         [Option('s',"string", Required = false, HelpText = "Input string.")]
-        public string str { get; set; }
+        public string Str { get; set; }
 
         [Option('e',"encode",Required =false,HelpText = "Encoding of input file")]
-        public string encoding { get; set; }
+        public string Encoding { get; set; }
 
         [Option('o',"format", Required = true, HelpText = "Output format.json or xml.")]
-        public string format { get; set; }
+        public string Format { get; set; }
 
         [Option('i', "indentxml", Required = false, HelpText = "Indent xml.")]
-        public bool indentxml { get; set; }
+        public bool Indentxml { get; set; }
 
         [Option('u', "outputfilename", Required = false, HelpText = "Output filename.")]
-        public string outputfilename { get; set; }
+        public string Outputfilename { get; set; }
 
 
-        [Option('p',"parserversion",Required =false,HelpText="Parser version.ex)110,130")]
-        public int parserversion { get; set; }
+        [Option('p',"parserversion",Required =false,HelpText= "Parser version.default 160.One of 80,90,100,110,120,130,140,150,160.")]
+        public int Parserversion { get; set; }
 
         [Option('q', "no-quotedIdentifier",Required=false,HelpText = "Not support quotedIdentifier.")]
-        public bool no_quotedIdentifier { get; set; }
+        public bool No_quotedIdentifier { get; set; }
         /*
                 [Option("noerrorlistener",Required =false,HelpText ="No use error listener")]
                 public bool noerrorlistener { get; set; }
