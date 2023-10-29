@@ -28,7 +28,7 @@ sqlparser -o json -s "select * from tab1"
 
 # Advantages
 
-High accuracy of parsing because this program is made with MicrosoftR SQL ServerR 2016 SP2 Transact-SQL ScriptDom.  
+High accuracy of parsing because this program is made with MicrosoftR SQL ServerR Transact-SQL ScriptDom.  
 https://www.microsoft.com/en-us/download/details.aspx?id=56833
 
 # Installation
