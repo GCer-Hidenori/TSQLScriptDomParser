@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLParser", "SQLParser\SQLParser.csproj", "{F19167A0-A3DF-4AB6-8641-DF93829870E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSQLScriptDom", "LibSQLScriptDom2016\LibSQLScriptDom.csproj", "{3A15A9D5-D56F-4EC5-B23A-D5244AFF2A28}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibSQLScriptDom", "LibSQLScriptDom\LibSQLScriptDom.csproj", "{3A15A9D5-D56F-4EC5-B23A-D5244AFF2A28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

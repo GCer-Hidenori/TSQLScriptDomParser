@@ -56,7 +56,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LibSQLScriptDom2016\LibSQLScriptDom.csproj">
+    <ProjectReference Include="..\LibSQLScriptDom\LibSQLScriptDom.csproj">
       <Project>{3a15a9d5-d56f-4ec5-b23a-d5244aff2a28}</Project>
       <Name>LibSQLScriptDom</Name>
     </ProjectReference>

@@ -41,12 +41,21 @@ namespace LibSQLScriptDom
                 case 120:
                     parser = new TSql120Parser(initialQuotedIdentifiers);
                     break;
-                case 0:
                 case 130:
                     parser = new TSql130Parser(initialQuotedIdentifiers);
                     break;
+                case 140:
+                    parser = new TSql140Parser(initialQuotedIdentifiers);
+                    break;
+                case 150:
+                    parser = new TSql150Parser(initialQuotedIdentifiers);
+                    break;
+                case 0:
+                case 160:
+                    parser = new TSql160Parser(initialQuotedIdentifiers);
+                    break;
                 default:
-                    Console.Error.WriteLine("SqlServer.TransactSql.ScriptDom version 13 supports only 80,90,100,110,120,130 parser.");
+                    Console.Error.WriteLine("SqlServer.TransactSql.ScriptDom version 161 supports only 80,90,100,110,120,130,140,150,160 parser.");
                     throw new ArgumentException();
             }
         }
