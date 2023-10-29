@@ -13,10 +13,12 @@ namespace LibSQLScriptDom
         {
         }
 
-        public Node parse(TSqlFragment tsqlnode, Node parent_node = null,string parent_key_name = null)
+        public Node Parse(TSqlFragment tsqlnode, Node parent_node = null,string parent_key_name = null)
         {
-            Node node = new Node();
-            node.class_name = tsqlnode.GetType().Name;
+            Node node = new Node
+            {
+                class_name = tsqlnode.GetType().Name
+            };
 
             if (tsqlnode.FirstTokenIndex >= 0)
             {
@@ -28,7 +30,7 @@ namespace LibSQLScriptDom
                 node.token = sb.ToString();
             }
 
-            if (parent_node != null)parent_node.setListDic(parent_key_name, node);
+            if (parent_node != null) parent_node.SetListDic(parent_key_name, node);
 
             foreach (var prop in tsqlnode.GetType().GetProperties())
             {
@@ -37,7 +39,7 @@ namespace LibSQLScriptDom
                 {
                     //NOP
                 } else if (prop.PropertyType.IsEnum == true & prop.PropertyType.Namespace == "Microsoft.SqlServer.TransactSql.ScriptDom") {
-                    node.setDic(prop.Name,prop.GetValue(tsqlnode).ToString());
+                    node.SetDic(prop.Name,prop.GetValue(tsqlnode).ToString());
                 }
                 else
                 {
@@ -65,7 +67,7 @@ namespace LibSQLScriptDom
 	                                {
 	                                    if (v.GetType().IsSubclassOf(typeof(TSqlFragment)))
 	                                    {
-	                                        parse((TSqlFragment)v, node,prop.Name);
+	                                        Parse((TSqlFragment)v, node,prop.Name);
 	                                    }
 	                                }
 	                            }
@@ -76,11 +78,11 @@ namespace LibSQLScriptDom
 	                        }
 	                        else if (prop_value_type.IsSubclassOf(typeof(TSqlFragment)))
 	                        {
-	                            parse((TSqlFragment)prop_value, node,prop.Name);
+	                            Parse((TSqlFragment)prop_value, node,prop.Name);
 	                        }
 	                        else
 	                        {
-                    			node.setDic(prop.Name,prop.GetValue(tsqlnode).ToString());
+                    			node.SetDic(prop.Name,prop.GetValue(tsqlnode).ToString());
                             }
                         }
                     }

@@ -10,7 +10,7 @@ namespace LibSQLScriptDom
 {
     public class Node
     {
-        static Hashtable members = new Hashtable();
+        //static Hashtable members = new Hashtable();
 
         public string token;
         public string class_name;
@@ -21,16 +21,16 @@ namespace LibSQLScriptDom
         {
 
         }
-        public void setDic(string key,object value)
+        public void SetDic(string key,object value)
         {
             dic[key] = value;
         }
-        public object getDic(string key)
+        public object GetDic(string key)
         {
             return dic[key];
         }
 
-        public void setListDic(string key, Node value)
+        public void SetListDic(string key, Node value)
         {
             if (listdic.ContainsKey(key))
             {
@@ -43,12 +43,12 @@ namespace LibSQLScriptDom
             }
             
         }
-        public List<Node> getListDic(string key)
+        public List<Node> GetListDic(string key)
         {
             return listdic[key];
         }
 
-        public Hashtable to_Hashtable()
+        public Hashtable ToHashtable()
         {
             var hash = new Hashtable();
             hash.Add("token", token);
@@ -64,21 +64,21 @@ namespace LibSQLScriptDom
                 var ary = new ArrayList();
                 foreach (var child in listdic[key])
                 {
-                    ary.Add(child.to_Hashtable());
+                    ary.Add(child.ToHashtable());
                 }
                 hash.Add(key, ary);
             }
             return hash;
         }
         
-        public XmlDocument to_xml()
+        public XmlDocument ToXml()
         {
             var doc = new XmlDocument();
-            doc.AppendChild(to_xml_element(doc));
+            doc.AppendChild(ToXmlElement(doc));
             return doc;
         }
         
-        public XmlElement to_xml_element(XmlDocument doc)
+        public XmlElement ToXmlElement(XmlDocument doc)
         {
             var element = doc.CreateElement("node");
             element.SetAttribute("token", token);
@@ -96,7 +96,7 @@ namespace LibSQLScriptDom
  
                 foreach(var child in listdic[key])
                 {
-                    childrenelement.AppendChild(child.to_xml_element(doc));
+                    childrenelement.AppendChild(child.ToXmlElement(doc));
                 }
                 element.AppendChild(childrenelement);
             }
